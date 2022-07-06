@@ -2,10 +2,10 @@
 
 /**
  * add - add two intergers and get result
- * @y: input interger 1
- * @x: input interger 2
+ * @y: input interger x
+ * @x: input interger sy
  * Description: Function adds two ints and returns result
- * Return : result to add 1 and 2.
+ * Return : Result to add x and y.
  */
 
 int add(int x, int y)
