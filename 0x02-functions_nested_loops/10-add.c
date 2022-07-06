@@ -1,9 +1,9 @@
 #include "main.h"
 
 /**
- * add - add two intergers and get result
+ * add - Sums the two inputs
  * @y: input interger x
- * @x: input interger sy
+ * @x: input interger y
  * Description: Function adds two ints and returns result
  * Return : Result to add x and y.
  */
