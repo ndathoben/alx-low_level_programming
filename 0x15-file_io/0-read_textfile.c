@@ -5,49 +5,31 @@
 #include <fcntl.h>
 #include <stdlib.h>
 /**
- * read_textfile - reads a text file and prints it to the standard output
- * @filename: the file which should be read
- * @letters: the number of letters the filename to be printed
- *
- * Return: the actual number of letters it could read and print,
- * 0, if the filename is NULL
- * 0, if the filename cannot be opened or read
- * 0, if write fails or does not write the expected amount of bytes
+ * read_textfile - Reads the text file
+ * @filename: the file
+ * @letters: Number of letters
+ * Description: reads a text file and prints it to the POSIX.
+ * Return: Number of letter
  */
 ssize_t read_textfile(const char *filename, size_t letters)
 {
-	int fd, result;
-	char *buff;
-	size_t count = 0;
+	int fp = 0, r = 0, w = 0;
+	char *buffer = NULL;
 
-	if (filename == NULL)
-		return (0);
+	if (filename)
+	{
+		buffer = malloc(sizeof(char) * letters);
+		fp = open(filename, O_RDONLY);
 
-	fd = open(filename, O_RDONLY);
+		if (buffer && fp != -1)
+		{
+			r = read(fp, buffer, letters);
+			w = write(STDOUT_FILENO, buffer, r);
+		}
 
-	if (fd == -1)
-		return (0);
+		close(fp);
+		free(buffer);
+	}
 
-	buff = malloc((sizeof(char) * letters) + 1);
-	if (buff == NULL)
-		return (0);
-
-	result = read(fd, buff, letters);
-	if (result <= 0)
-		return (0);
-
-	buff[letters] = '\0';
-
-	while (buff[count] != '\0')
-		count++;
-
-	close(fd);
-
-	result = write(1, buff, (letters + 1));
-	if (result <= 0)
-		return (0);
-
-	free(buff);
-
-	return (count);
+	return (w);
 }
